@@ -20,19 +20,25 @@ const gameObj = {
     
     makeNewMove(playerMoving,move) {
         i = 0
+        let illegal = true
         this.gameboard.forEach((tile) => {
             if (tile == move) {this.gameboard.splice(i,1)
-            playerMoving.marks.push(move)}
+            playerMoving.marks.push(move)
+            illegal = false}
             i++
         })
+        alert(illegal)
+        return illegal
     },
 
     evaluateGameStatus(player) {
         let verts = [0,0,0]
         let horizontals = [0,0,0]
         for (let i=0;i < player.marks.length;i++) {
-        verts[player.marks[i][1]] += 1
-        horizontals[this.lettersToNumbers(player.marks[i])] += 1    
+        verts[player.marks[i][1] -1] += 1
+        horizontals[this.lettersToNumbers(player.marks[i][0]) -1] += 1    
+        console.table(verts)
+        console.table(horizontals)
     }
     },
     endTurn() {
@@ -41,12 +47,15 @@ const gameObj = {
 
     },
     playGame() {
-        let move = prompt("obama")
+        let move = prompt("Your move:")
         if (move == "break") {return}
         else {
-        this.makeNewMove(this.currentTurn,move)
+        let illegal = this.makeNewMove(this.currentTurn,move)
         if (this.evaluateGameStatus(this.currentTurn) == undefined) {
-            this.endTurn()
+            if (illegal == false) {this.endTurn()}
+            console.log(this.gameboard)
+            console.log(this.players[0].marks)
+            console.log(this.players[1].marks)
             this.playGame()
         }
     }},
