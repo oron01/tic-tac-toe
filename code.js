@@ -32,6 +32,7 @@ const gameObj = {
     },
 
     evaluateGameStatus(player) {
+        let win = false
         let verts = [0,0,0]
         let horizontals = [0,0,0]
         for (let i=0;i < player.marks.length;i++) {
@@ -39,6 +40,15 @@ const gameObj = {
         horizontals[this.lettersToNumbers(player.marks[i][0]) -1] += 1    
         console.table(verts)
         console.table(horizontals)
+        verts.forEach(stat => {
+            if (stat == 3) {return win = true}
+        });
+        horizontals.forEach(stat => {
+            if (stat == 3) {return win = true}
+        })
+        if (win == true) {
+            alert("win!")
+            return win}
     }
     },
     endTurn() {
