@@ -80,6 +80,7 @@ const gameObj = {
     },
     playGame(move) {
         // let move = prompt("Your move:")
+        if (this.win == true) {return}
         if (move == "break") {return}
         else {
         let illegal = this.makeNewMove(this.currentTurn,move)
