@@ -1,5 +1,20 @@
+let boardContainer = document.querySelector(".boardContainer")
+let squareClick = (event) => {
+    gameObj.playGame(event.currentTarget.id)
+}
+
+for (i=0;i < 9 ; i++) {
+    let squareList = ["a1","a2","a3","b1","b2","b3","c1","c2","c3"]
+    let square = document.createElement("div")
+    square.classList.add("square")
+    square.id = squareList[i]
+    boardContainer.appendChild(square)
+    square.addEventListener("click",squareClick)
+}
+
 const gameObj = {
     gameboard: ["a1","a2","a3","b1","b2","b3","c1","c2","c3"],
+    win:false,
     
     lettersToNumbers(letter) {
         return (letter == "a") ? 1 : (letter == "b") ? 2 : 3
@@ -27,12 +42,11 @@ const gameObj = {
             illegal = false}
             i++
         })
-        alert(illegal)
+        // alert(illegal)
         return illegal
     },
 
     evaluateGameStatus(player) {
-        let win = false
         let verts = [0,0,0]
         let horizontals = [0,0,0]
         for (let i=0;i < player.marks.length;i++) {
@@ -41,32 +55,47 @@ const gameObj = {
         console.table(verts)
         console.table(horizontals)
         verts.forEach(stat => {
-            if (stat == 3) {return win = true}
+            if (stat == 3) {gameObj.win = true}
         });
         horizontals.forEach(stat => {
-            if (stat == 3) {return win = true}
+            if (stat == 3) {gameObj.win = true}
         })
-        if (win == true) {
-            alert("win!")
-            return win}
     }
+        // alert(JSON.stringify(verts))
+        let checkMarked = (square) => {
+            if (player.marks.includes(square)) {return true}
+            else {return false}
+        }
+        if (checkMarked("b2") && ((checkMarked("a1") && checkMarked("c3")) || (checkMarked("a3") && checkMarked("c1")))) {gameObj.win = true}
     },
     endTurn() {
         if (this.currentTurn == this.players[0]) {this.currentTurn = this.players[1]}
         else {this.currentTurn = this.players[0]}
 
     },
-    playGame() {
-        let move = prompt("Your move:")
+    markMove(move,player) {
+        let square = document.querySelector(`#${move}`)
+        if (player == this.players[0]) {square.classList.add("markedSquare")}
+        else {square.classList.add("markedCircle")}
+    },
+    playGame(move) {
+        // let move = prompt("Your move:")
         if (move == "break") {return}
         else {
         let illegal = this.makeNewMove(this.currentTurn,move)
         if (this.evaluateGameStatus(this.currentTurn) == undefined) {
-            if (illegal == false) {this.endTurn()}
+            if (illegal == false) {
+                this.markMove(move,this.currentTurn)
+                if (this.win == true) {
+                    alert("win!")
+                    console.log("win")
+                }
+                this.endTurn()}
+
             console.log(this.gameboard)
             console.log(this.players[0].marks)
             console.log(this.players[1].marks)
-            this.playGame()
+            // this.playGame()
         }
     }},
     displayWinningMove () {},
@@ -85,7 +114,7 @@ function game() {
     gameObj.players.push(player1)
     gameObj.players.push(player2)
     gameObj.renderNewBoard()
-    gameObj.playGame()
+    // gameObj.playGame()
             
 }
 }

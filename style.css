@@ -1,0 +1,24 @@
+.boardContainer {
+    height: 500px;
+    width: 500px;
+    background-color: black;
+    display: grid;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+}
+
+.square {
+    background-color: white;
+    margin: 10px;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.markedSquare::before {
+    content:"X"
+}
+
+.markedCircle::before {
+    content:"O"
+}
