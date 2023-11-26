@@ -18,7 +18,7 @@ for (i=0;i < 9 ; i++) {
 }
 
 const gameObj = {
-    names: [],
+    names: ["player1","player2"],
     gameboard: ["a1","a2","a3","b1","b2","b3","c1","c2","c3"],
     win:false,
     
@@ -110,7 +110,8 @@ const gameObj = {
         if (this.evaluateGameStatus(this.currentTurn) == undefined) {
             if (illegal == false) {
                 this.markMove(move,this.currentTurn)
-                if (this.win == true) {
+                if (this.win == true) {this.currentTurn.score += 1
+                    this.displayScore()
                     alert("win!")
                     console.log("win")
                     console.log(this.currentTurn)
@@ -134,10 +135,18 @@ const gameObj = {
         allSquares.forEach(square => {square.className = "square"})}
         player1.marks = []
         player2.marks = []
-        if (this.win == true) {this.currentTurn.score += 1
+        if (this.win == true) {
         this.win = false}
         gameStatusDisplay.innerText = "Player 1's Turn"
         this.endTurn()
+        this.displayScore()
+
+    },
+    displayScore () {
+        let player1Score = document.querySelector(`.player1Stats`)
+        let player2Score = document.querySelector(`.player2Stats`)
+        player1Score.innerText = `${this.names[0]}\n Wins: ${player1.score}`
+        player2Score.innerText = `${this.names[1]}\n Wins: ${player2.score}`
 
     },
     resetGame() {
@@ -167,6 +176,7 @@ const gameObj = {
         gameObj.renderNewBoard()
         resetBoard()
         this.win = false
+        this.displayScore()
 
     },
     /* render a board
@@ -193,5 +203,20 @@ function game() {
 
 resetButton.addEventListener("click",gameObj.resetGame.bind(gameObj))
 startButton.addEventListener("click",gameObj.startNewGame.bind(gameObj))
+
+player1 = document.querySelector(".player1")
+player2 = document.querySelector(".player2")
+
+function changePlayerName(position) {
+    let newName = prompt("What is your Name?")
+    gameObj.names[position] = newName
+    alert("a")
+    gameObj.displayScore()
+
+}
+/* VERY IMPORTANT, figure out why this isn't working here */
+console.log(gameObj.names)
+player1.addEventListener("click",changePlayerName.bind(gameObj,0))
+player2.addEventListener("click",changePlayerName.bind(gameObj,1))
 
 game()
