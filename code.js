@@ -1,6 +1,8 @@
 let boardContainer = document.querySelector(".boardContainer")
 
 let resetButton = document.querySelector(".resetButton")
+let startButton = document.querySelector(".startButton")
+let gameStatusDisplay = document.querySelector(".gameStatus")
 
 let squareClick = (event) => {
     gameObj.playGame(event.currentTarget.id)
@@ -16,6 +18,7 @@ for (i=0;i < 9 ; i++) {
 }
 
 const gameObj = {
+    names: [],
     gameboard: ["a1","a2","a3","b1","b2","b3","c1","c2","c3"],
     win:false,
     
@@ -26,11 +29,12 @@ const gameObj = {
     currentTurn: null,
     players: [],
     
-    player() {
+    player(playerName) {
         let marks = []
         let winStatus = ""
         let score = 0
-        return {marks,winStatus,score}
+        let name = playerName
+        return {marks,winStatus,score,name}
     },
 
     renderNewBoard() {
@@ -109,6 +113,8 @@ const gameObj = {
                 if (this.win == true) {
                     alert("win!")
                     console.log("win")
+                    console.log(this.currentTurn)
+                    gameStatusDisplay.innerText = `${this.currentTurn.name} win!`
                 }
                 this.endTurn()}
 
@@ -119,6 +125,21 @@ const gameObj = {
         }
     }},
     displayWinningMove () {},
+    startNewGame() {
+        let player1Icon = document.querySelector(".player1")
+        let player2Icon = document.querySelector(".player2")
+        gameObj.renderNewBoard()
+        for (let i = 0; i < this.gameboard.length; i++) {
+            let allSquares = document.querySelectorAll(".square")
+        allSquares.forEach(square => {square.className = "square"})}
+        player1.marks = []
+        player2.marks = []
+        if (this.win == true) {this.currentTurn.score += 1
+        this.win = false}
+        gameStatusDisplay.innerText = "Player 1's Turn"
+        this.endTurn()
+
+    },
     resetGame() {
         let resetBoard = () => {
             for (let i = 0; i < this.gameboard.length; i++) {
@@ -132,8 +153,8 @@ const gameObj = {
             }
             console.table(this.gameboard)
         }
-        player1 = this.player()
-        player2 = this.player()
+        player1 = this.player(this.names[0] || "player1")
+        player2 = this.player(this.names[1] || "player2")
         this.currentTurn = player1
         this.endTurn()
         this.win = false
@@ -157,8 +178,8 @@ const gameObj = {
 }
 function game() {
     if (gameObj.players.length == 0) {
-    player1 = gameObj.player()
-    player2 = gameObj.player()
+    player1 = gameObj.player("Player1")
+    player2 = gameObj.player("Player2")
     gameObj.currentTurn = player1
     gameObj.players.push(player1)
     gameObj.players.push(player2)
@@ -171,5 +192,6 @@ function game() {
 
 
 resetButton.addEventListener("click",gameObj.resetGame.bind(gameObj))
+startButton.addEventListener("click",gameObj.startNewGame.bind(gameObj))
 
 game()
