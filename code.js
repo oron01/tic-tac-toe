@@ -76,17 +76,22 @@ const gameObj = {
         let player2Icon = document.querySelector(".player2")
         player1Icon.classList.remove("currentTurn")
         player2Icon.classList.remove("currentTurn")
+        player1Icon.classList.remove("winner")
+        player2Icon.classList.remove("winner")
         if (this.currentTurn == this.players[0] && this.win == false) {
             player2Icon.classList.add("currentTurn")
             this.currentTurn = this.players[1]}
         else if (this.currentTurn == this.players[1] && this.win == true) {
-            player2Icon.classList.add("currentTurn")
+            player2Icon.classList.add("winner")
         }
-        else {
+        else if (this.win == false) {
             player1Icon.classList.add("currentTurn")
             this.currentTurn = this.players[0]}
+        else {
+            player1Icon.classList.add("winner")
+            this.currentTurn = this.players[0]}
+        },
 
-    },
     markMove(move,player) {
         let square = document.querySelector(`#${move}`)
         if (player == this.players[0]) {square.classList.add("markedSquare")}
@@ -129,6 +134,11 @@ const gameObj = {
         }
         player1 = this.player()
         player2 = this.player()
+        this.currentTurn = player1
+        this.endTurn()
+        this.win = false
+        this.currentTurn = player2
+        this.endTurn()
         this.currentTurn = player1
         gameObj.players = []
         gameObj.players.push(player1)

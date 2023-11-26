@@ -87,7 +87,7 @@ body {
 }
 
 .player {
-    margin: 0px 50%;
+    margin: 0px auto 0px 165px;
     height: 75px;
     width: 75px;
     border-radius: 50%;
@@ -96,11 +96,13 @@ body {
     background-image: url(https://preview.redd.it/drop-the-mewing-routine-trump-v0-b80o6apvgpob1.jpg?width=640&crop=smart&auto=webp&s=11f1584c88fd73278fc246988f03770a4122f8a2);
     background-size: 100px 100px;
     background-position: -21px -25px;
+    position: relative;
 
 
 }
 
 .player:first-child {
+    margin: 0px 165px 0px auto;
     justify-self: start;
     background-image: url(https://obamawhitehouse.archives.gov/sites/default/files/image/image_file/bangs1.jpg);
     background-size: cover;
@@ -118,4 +120,30 @@ body {
     box-shadow: 0px 0px 10px 2.5px red;
     transition: background-color 1s;    
 
+}
+
+.winner {
+    box-shadow: 0px 0px 10px 2.5px gold;
+    transition: background-color 1s;    
+  
+}
+
+.stats {
+    /* display: none; */
+    height: 100px;
+    width: 100px;
+    border-radius: 25%;
+    opacity: 0;
+    background-color: red;
+    position: absolute;
+    top: -125px;
+    left: -12.5px;
+    transition: opacity 0.75s;
+    pointer-events: none;
+
+}
+
+.player:hover > .stats{
+    display: block;
+    opacity: 0.9;
 }

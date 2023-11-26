@@ -9,3 +9,12 @@ and on the top i can put game options like start reset, etc
 
 I can also edit and maybe create an animation for every time
 a mark happens like, an animation for an x or a circle
+
+I can consider (I think that is what i'd do), is instead of adding the stats
+to hover on the pfps, to add a moving slider at each side that
+would display the statistics and would look like a [] (narrow, tallish)
+rectangle that would have an arrow inside, and would slide away
+from the edge it sticks on with the statistics, and is collapsable.
+
+maybe i can keep their hover for something funny like a random quote
+or an audio generator
