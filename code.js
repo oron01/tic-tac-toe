@@ -72,8 +72,19 @@ const gameObj = {
         if (checkMarked("b2") && ((checkMarked("a1") && checkMarked("c3")) || (checkMarked("a3") && checkMarked("c1")))) {gameObj.win = true}
     },
     endTurn() {
-        if (this.currentTurn == this.players[0]) {this.currentTurn = this.players[1]}
-        else {this.currentTurn = this.players[0]}
+        let player1Icon = document.querySelector(".player1")
+        let player2Icon = document.querySelector(".player2")
+        player1Icon.classList.remove("currentTurn")
+        player2Icon.classList.remove("currentTurn")
+        if (this.currentTurn == this.players[0] && this.win == false) {
+            player2Icon.classList.add("currentTurn")
+            this.currentTurn = this.players[1]}
+        else if (this.currentTurn == this.players[1] && this.win == true) {
+            player2Icon.classList.add("currentTurn")
+        }
+        else {
+            player1Icon.classList.add("currentTurn")
+            this.currentTurn = this.players[0]}
 
     },
     markMove(move,player) {

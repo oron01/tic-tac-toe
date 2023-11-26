@@ -109,7 +109,13 @@ body {
 
 .player:hover {
 
-    box-shadow: 0px 0px 20px 5px red;
+    box-shadow: 0px 0px 10px 2.5px red;
     transition: background-color 1s;    
     cursor: pointer;
+}
+
+.currentTurn {
+    box-shadow: 0px 0px 10px 2.5px red;
+    transition: background-color 1s;    
+
 }
