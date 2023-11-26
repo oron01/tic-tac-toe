@@ -29,12 +29,21 @@ body {
 .nav > div {
     margin: 0px 15px;
     padding: 10px;
-    background-color: red;
+    background-color: black;
     border-radius: 10px;
     color: white;
     font-weight: bold;
     cursor:pointer;
+    /* border-left: white solid 3px; */
+    border-top: white solid 3px;
+    box-shadow: 0px 0px 0px 3px white
+
 }
+.nav > div:active {
+    box-shadow: none;
+    border-top: 0px;
+}
+
 .nav :first-child {
     justify-self: right;
 }
@@ -43,12 +52,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:center;
+    justify-content:space-evenly;
 }
 
 .boardContainer {
     /* margin-top: 5vh; */
-    margin-bottom: 5vh;
+    /* margin-bottom: 5vh; */
     height: 500px;
     width: 500px;
     background-color: black;
@@ -58,8 +67,10 @@ body {
 
 .gameStatus {
     /* margin: 0; */
-    margin-top: 2.5vh;
+    /* margin-top: 2.5vh; */
     font-size: 1.5rem;
+    text-align: center;
+    min-height: 56px;
 }
 
 .square {
@@ -94,6 +105,7 @@ body {
     display: grid;
     grid-template: 1fr / 1fr 1fr;
     align-items: center;
+    position: relative;
 }
 
 .player {
@@ -160,4 +172,12 @@ body {
 
 .player:hover > .stats{
     opacity: 0.9;
+}
+
+.scoreCounter {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 1.5rem;
 }

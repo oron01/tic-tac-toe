@@ -134,10 +134,10 @@ const gameObj = {
     updateGameStatus() {
         // alert(this.names)
         if (this.currentTurn == this.players[0]) {
-            if (this.win == true) {gameStatusDisplay.innerText = `${this.names[0]} Wins!`}
+            if (this.win == true) {gameStatusDisplay.innerText = `${this.names[0]} Wins!\n Press START for a new round.`}
             else {gameStatusDisplay.innerText = `${this.names[0]}'s Turn`}
         }
-        else {if (this.win == true) {gameStatusDisplay.innerText = `${this.names[1]} Wins!`}
+        else {if (this.win == true) {gameStatusDisplay.innerText = `${this.names[1]} Wins!\n Press START for a new round.`}
             else {gameStatusDisplay.innerText = `${this.names[1]}'s Turn`}}
     },
     startNewGame() {
