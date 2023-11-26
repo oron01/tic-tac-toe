@@ -208,7 +208,7 @@ function game() {
     gameObj.players.push(player1)
     gameObj.players.push(player2)
     gameObj.renderNewBoard()
-    displayScore()
+    gameObj.displayScore()
     // gameObj.playGame()
             
 }
