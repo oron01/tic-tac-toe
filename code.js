@@ -116,9 +116,9 @@ const gameObj = {
                 this.markMove(move,this.currentTurn)
                 if (this.win == true) {this.currentTurn.score += 1
                     this.displayScore()
-                    alert("win!")
-                    console.log("win")
-                    console.log(this.currentTurn)
+                    // alert("win!")
+                    // console.log("win")
+                    // console.log(this.currentTurn)
                     this.updateGameStatus()
                     // gameStatusDisplay.innerText = `${this.currentTurn.name} win!`
                 }
@@ -225,7 +225,7 @@ player2 = document.querySelector(".player2")
 function changePlayerName(position) {
     let newName = prompt("What is your Name?")
     this.names[position] = newName
-    alert("a")
+    // alert("a")
     this.displayScore()
 
 }
