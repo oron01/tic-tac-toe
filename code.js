@@ -18,7 +18,7 @@ for (i=0;i < 9 ; i++) {
 }
 
 const gameObj = {
-    names: ["player1","player2"],
+    names: ["Obamna","Trimp"],
     gameboard: ["a1","a2","a3","b1","b2","b3","c1","c2","c3"],
     win:false,
     
@@ -84,13 +84,17 @@ const gameObj = {
         player2Icon.classList.remove("winner")
         if (this.currentTurn == this.players[0] && this.win == false) {
             player2Icon.classList.add("currentTurn")
-            this.currentTurn = this.players[1]}
+            this.currentTurn = this.players[1]
+            this.updateGameStatus()
+        }
         else if (this.currentTurn == this.players[1] && this.win == true) {
             player2Icon.classList.add("winner")
         }
         else if (this.win == false) {
             player1Icon.classList.add("currentTurn")
-            this.currentTurn = this.players[0]}
+            this.currentTurn = this.players[0]
+            this.updateGameStatus()
+        }
         else {
             player1Icon.classList.add("winner")
             this.currentTurn = this.players[0]}
@@ -115,7 +119,8 @@ const gameObj = {
                     alert("win!")
                     console.log("win")
                     console.log(this.currentTurn)
-                    gameStatusDisplay.innerText = `${this.currentTurn.name} win!`
+                    this.updateGameStatus()
+                    // gameStatusDisplay.innerText = `${this.currentTurn.name} win!`
                 }
                 this.endTurn()}
 
@@ -125,7 +130,16 @@ const gameObj = {
             // this.playGame()
         }
     }},
-    displayWinningMove () {},
+    displayWinningMove() {},
+    updateGameStatus() {
+        // alert(this.names)
+        if (this.currentTurn == this.players[0]) {
+            if (this.win == true) {gameStatusDisplay.innerText = `${this.names[0]} Wins!`}
+            else {gameStatusDisplay.innerText = `${this.names[0]}'s Turn`}
+        }
+        else {if (this.win == true) {gameStatusDisplay.innerText = `${this.names[1]} Wins!`}
+            else {gameStatusDisplay.innerText = `${this.names[1]}'s Turn`}}
+    },
     startNewGame() {
         let player1Icon = document.querySelector(".player1")
         let player2Icon = document.querySelector(".player2")
@@ -137,8 +151,8 @@ const gameObj = {
         player2.marks = []
         if (this.win == true) {
         this.win = false}
-        gameStatusDisplay.innerText = "Player 1's Turn"
         this.endTurn()
+        this.updateGameStatus()
         this.displayScore()
 
     },
@@ -194,6 +208,7 @@ function game() {
     gameObj.players.push(player1)
     gameObj.players.push(player2)
     gameObj.renderNewBoard()
+    displayScore()
     // gameObj.playGame()
             
 }
@@ -209,12 +224,11 @@ player2 = document.querySelector(".player2")
 
 function changePlayerName(position) {
     let newName = prompt("What is your Name?")
-    gameObj.names[position] = newName
+    this.names[position] = newName
     alert("a")
-    gameObj.displayScore()
+    this.displayScore()
 
 }
-/* VERY IMPORTANT, figure out why this isn't working here */
 console.log(gameObj.names)
 player1.addEventListener("click",changePlayerName.bind(gameObj,0))
 player2.addEventListener("click",changePlayerName.bind(gameObj,1))
