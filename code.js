@@ -116,6 +116,7 @@ const gameObj = {
                 this.markMove(move,this.currentTurn)
                 if (this.win == true) {this.currentTurn.score += 1
                     this.displayScore()
+                    this.updateScoreCounter()
                     // alert("win!")
                     // console.log("win")
                     // console.log(this.currentTurn)
@@ -139,6 +140,10 @@ const gameObj = {
         }
         else {if (this.win == true) {gameStatusDisplay.innerText = `${this.names[1]} Wins!\n Press START for a new round.`}
             else {gameStatusDisplay.innerText = `${this.names[1]}'s Turn`}}
+    },
+    updateScoreCounter() {
+        let scoreCounter = document.querySelector(".scoreCounter")
+        scoreCounter.textContent = `${this.players[0].score} - ${this.players[1].score}`
     },
     startNewGame() {
         let player1Icon = document.querySelector(".player1")
@@ -191,6 +196,8 @@ const gameObj = {
         resetBoard()
         this.win = false
         this.displayScore()
+        this.updateScoreCounter()
+
 
     },
     /* render a board
