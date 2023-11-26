@@ -20,16 +20,46 @@ body {
 
 .nav {
     background-color: grey;
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    justify-items: left;
+    align-items: center;
+}
+
+.nav > div {
+    margin: 0px 15px;
+    padding: 10px;
+    background-color: red;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor:pointer;
+}
+.nav :first-child {
+    justify-self: right;
+}
+
+.gameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
 }
 
 .boardContainer {
-    margin-top: 5vh;
+    /* margin-top: 5vh; */
     margin-bottom: 5vh;
     height: 500px;
     width: 500px;
     background-color: black;
     display: grid;
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+}
+
+.gameStatus {
+    /* margin: 0; */
+    margin-top: 2.5vh;
+    font-size: 1.5rem;
 }
 
 .square {
@@ -51,4 +81,35 @@ body {
 
 .footer {
     background-color: grey;
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    align-items: center;
+}
+
+.player {
+    margin: 0px 50%;
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    background-color: black;
+    justify-self: end;
+    background-image: url(https://preview.redd.it/drop-the-mewing-routine-trump-v0-b80o6apvgpob1.jpg?width=640&crop=smart&auto=webp&s=11f1584c88fd73278fc246988f03770a4122f8a2);
+    background-size: 100px 100px;
+    background-position: -21px -25px;
+
+
+}
+
+.player:first-child {
+    justify-self: start;
+    background-image: url(https://obamawhitehouse.archives.gov/sites/default/files/image/image_file/bangs1.jpg);
+    background-size: cover;
+    background-position: -18px 0px;
+}
+
+.player:hover {
+
+    box-shadow: 0px 0px 20px 5px red;
+    transition: background-color 1s;    
+    cursor: pointer;
 }

@@ -1,0 +1,11 @@
+I want to have two player icons at the bottom, lie the name
+then a player icon, and when you hover it you see statistics pop
+up automatically with an animation or maybe onclick idk
+
+thats on the footer
+
+and on the top i can put game options like start reset, etc
+(Start(start new game) Reset(reset scores and players))
+
+I can also edit and maybe create an animation for every time
+a mark happens like, an animation for an x or a circle

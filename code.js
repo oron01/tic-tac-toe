@@ -1,4 +1,7 @@
 let boardContainer = document.querySelector(".boardContainer")
+
+let resetButton = document.querySelector(".resetButton")
+
 let squareClick = (event) => {
     gameObj.playGame(event.currentTarget.id)
 }
@@ -93,13 +96,37 @@ const gameObj = {
                 }
                 this.endTurn()}
 
-            console.log(this.gameboard)
-            console.log(this.players[0].marks)
-            console.log(this.players[1].marks)
+            // console.log(this.gameboard)
+            // console.log(this.players[0].marks)
+            // console.log(this.players[1].marks)
             // this.playGame()
         }
     }},
     displayWinningMove () {},
+    resetGame() {
+        let resetBoard = () => {
+            for (let i = 0; i < this.gameboard.length; i++) {
+                let allSquares = document.querySelectorAll(".square")
+                allSquares.forEach(square => {
+                    if (this.gameboard.includes(square.id)) {
+                        // console.table(square)
+                        square.className = "square"}
+                });
+
+            }
+            console.table(this.gameboard)
+        }
+        player1 = this.player()
+        player2 = this.player()
+        this.currentTurn = player1
+        gameObj.players = []
+        gameObj.players.push(player1)
+        gameObj.players.push(player2)
+        gameObj.renderNewBoard()
+        resetBoard()
+        this.win = false
+
+    },
     /* render a board
     have player one take a square
     evaluate a win condition
@@ -119,5 +146,9 @@ function game() {
             
 }
 }
+
+
+
+resetButton.addEventListener("click",gameObj.resetGame.bind(gameObj))
 
 game()
